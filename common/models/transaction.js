@@ -1,33 +1,33 @@
 'use strict';
 
-module.exports = function(Customer) {
-        Customer.remoteMethod(
-            'getNameLike',
+module.exports = function(Transaction) {
+        Transaction.remoteMethod(
+            'getIdCustomer',
             {
-                description: 'get name like',
+                description: 'get id customer',
                 accepts: [
-                    { arg: 'firstname', type: 'string'}
+                    { arg: 'id_customer', type: 'string'}
                 ],
                 returns:{
                     arg: 'res', type:'object', root: true
                 },
-                http: { path: '/getNameLike', verb: 'get' }
+                http: { path: '/getIdCustomer', verb: 'get' }
             }
         );
     
-        Customer.getNameLike = function(firstname, callback){
+        Transaction.getIdCustomer = function(id_customer, callback){
             new Promise(function(resolve, reject){
                 var filter = {
                     where: {
-                        firstname : {
-                            like : firstname
+                        id_customer : {
+                            like : id_customer
                         }
                     }
                 }
-                Customer.find(filter, function(err, result){
+                Transaction.find(filter, function(err, result){
                     if(err) reject (err)
                     if(result === null){
-                        err = new Error ("Nama Tidak Dapat Ditemukan")
+                        err = new Error ("Transaction Tidak Dapat Ditemukan")
                         err.statusCode = 404
                         reject (err)
                     }
@@ -41,193 +41,73 @@ module.exports = function(Customer) {
             });
         }
     
-        Customer.remoteMethod(
-            'getLastName',
+        Transaction.remoteMethod(
+            'getNameCategory',
             {
-                description: 'get last name like',
+                description: 'get name category',
                 accepts: [
-                    { arg: 'lastname', type: 'string'}
+                    { arg: 'name_category', type: 'string'}
                 ],
                 returns:{
                     arg: 'res', type:'object', root: true
                 },
-                http: { path: '/getLastName', verb: 'get' }
+                http: { path: '/getNameCategory', verb: 'get' }
             }
         );
     
-        Customer.getLastName = function(lastname, callback){
+        Transaction.getNameCategory = function(name_category, callback){
             new Promise(function(resolve, reject){
                 var filter = {
                     where: {
-                        lastname : {
-                            like : lastname
-                        }
-                    }
-                }
-                Customer.find(filter, function(err, result){
-                    if(err) reject (err)
-                    if(result === null){
-                        err = new Error ("Nama Akhir Tidak Dapat Ditemukan")
-                        err.statusCode = 404
-                        reject (err)
-                    }
-                    resolve(result)
-                })
-            }).then(function(res){
-                if (!res) callback (err)
-                return callback (null, res)
-            }).catch(function(err){
-                callback(err);
-            });
-        }
-    
-        Customer.remoteMethod(
-            'getEmail',
-            {
-                description: 'get email like',
-                accepts: [
-                    { arg: 'email', type: 'string'}
-                ],
-                returns:{
-                    arg: 'res', type:'object', root: true
-                },
-                http: { path: '/getEmail', verb: 'get' }
-            }
-        );
-    
-        Customer.getEmail = function(email, callback){
-            new Promise(function(resolve, reject){
-                var filter = {
-                    where: {
-                        email : {
-                            like : email
+                        name_category : {
+                            like : name_category
                         }
                     }
                  }
-                Customer.find(filter, function(err, result){
+                Transaction.find(filter, function(err, result){
                     if(err) reject (err)
                     if(result === null){
-                        err = new Error ("Email Tidak Dapat Ditemukan")
+                        err = new Error ("Name Tidak Dapat Ditemukan")
                         err.statusCode = 404
                         reject (err)
                     }
                     resolve(result)
                 })
-            }).then(function(res){
-                if (!res) callback (err)
-                return callback (null, res)
-            }).catch(function(err){
-                callback(err);
-            });
-        }
 
-        Customer.remoteMethod(
-            'getAddress',
-            {
-                description: 'get address like',
-                accepts: [
-                    { arg: 'address', type: 'string'}
-                ],
-                returns:{
-                    arg: 'res', type:'object', root: true
-                },
-                http: { path: '/getAddress', verb: 'get' }
-            }
-        );
-    
-        Customer.getAddress = function(address, callback){
-            new Promise(function(resolve, reject){
-                var filter = {
-                    where: {
-                        address : {
-                            like : address
-                        }
-                    }
-                 }
-                Customer.find(filter, function(err, result){
-                    if(err) reject (err)
-                    if(result === null){
-                        err = new Error ("Address Tidak Dapat Ditemukan")
-                        err.statusCode = 404
-                        reject (err)
-                    }
-                    resolve(result)
-                })
             }).then(function(res){
                 if (!res) callback (err)
                 return callback (null, res)
             }).catch(function(err){
                 callback(err);
             });
-        }
-    
-        Customer.remoteMethod(
-            'getPhone',
-            {
-                description: 'get phone like',
-                accepts: [
-                    { arg: 'phone', type: 'string'}
-                ],
-                returns:{
-                    arg: 'res', type:'object', root: true
-                },
-                http: { path: '/getPhone', verb: 'get' }
-            }
-        );
-    
-        Customer.getPhone = function(phone, callback){
-            new Promise(function(resolve, reject){
-                var filter = {
-                    where: {
-                        phone : {
-                            like : phone
-                        }
-                    }
-                 }
-                Customer.find(filter, function(err, result){
-                    if(err) reject (err)
-                    if(result === null){
-                        err = new Error ("Email Tidak Dapat Ditemukan")
-                        err.statusCode = 404
-                        reject (err)
-                    }
-                    resolve(result)
-                })
-            }).then(function(res){
-                if (!res) callback (err)
-                return callback (null, res)
-            }).catch(function(err){
-                callback(err);
-            });
-        }
+        }    
 
-        Customer.remoteMethod(
-            'getGender',
+        Transaction.remoteMethod(
+            'getItem',
             {
-                description: 'get gender like',
+                description: 'get item',
                 accepts: [
-                    { arg: 'gender', type: 'string'}
+                    { arg: 'item', type: 'string'}
                 ],
                 returns:{
                     arg: 'res', type:'object', root: true
                 },
-                http: { path: '/getGender', verb: 'get' }
+                http: { path: '/getItem', verb: 'get' }
             }
         );
     
-        Customer.getGender = function(gender, callback){
+        Transaction.getItem = function(item, callback){
             new Promise(function(resolve, reject){
                 var filter = {
                     where: {
-                        gender : {
-                            like : gender
-                        }
+                        item : {
+                            like : item                        }
                     }
                  }
-                Customer.find(filter, function(err, result){
+                Transaction.find(filter, function(err, result){
                     if(err) reject (err)
                     if(result === null){
-                        err = new Error ("Email Tidak Dapat Ditemukan")
+                        err = new Error ("Item Tidak Dapat Ditemukan")
                         err.statusCode = 404
                         reject (err)
                     }
@@ -241,4 +121,81 @@ module.exports = function(Customer) {
             });
         }
         
-    };
+        Transaction.remoteMethod(
+            'getQuantity',
+            {
+                description: 'get quantity',
+                accepts: [
+                    { arg: 'quantity', type: 'string'}
+                ],
+                returns:{
+                    arg: 'res', type:'object', root: true
+                },
+                http: { path: '/getQuantity', verb: 'get' }
+            }
+        );
+    
+        Transaction.getQuantity = function(quantity, callback){
+            new Promise(function(resolve, reject){
+                var filter = {
+                    where: {
+                        quantity : {
+                            like : quantity                        }
+                    }
+                 }
+                Transaction.find(filter, function(err, result){
+                    if(err) reject (err)
+                    if(result === null){
+                        err = new Error ("Quantity Tidak Dapat Ditemukan")
+                        err.statusCode = 404
+                        reject (err)
+                    }
+                    resolve(result)
+                })
+            }).then(function(res){
+                if (!res) callback (err)
+                return callback (null, res)
+            }).catch(function(err){
+                callback(err);
+            });
+        }
+
+        Transaction.remoteMethod(
+            'getPrice',
+            {
+                description: 'get price',
+                accepts: [
+                    { arg: 'price', type: 'string'}
+                ],
+                returns:{
+                    arg: 'res', type:'object', root: true
+                },
+                http: { path: '/getPrice', verb: 'get' }
+            }
+        );
+    
+        Transaction.getPrice = function(price, callback){
+            new Promise(function(resolve, reject){
+                var filter = {
+                    where: {
+                        price : {
+                            like : price                        }
+                    }
+                 }
+                Transaction.find(filter, function(err, result){
+                    if(err) reject (err)
+                    if(result === null){
+                        err = new Error ("Price Tidak Dapat Ditemukan")
+                        err.statusCode = 404
+                        reject (err)
+                    }
+                    resolve(result)
+                })
+            }).then(function(res){
+                if (!res) callback (err)
+                return callback (null, res)
+            }).catch(function(err){
+                callback(err);
+            });
+        }
+};
